@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>消息订阅</title>
+</head>
+<body>
+	<script src="stomp.js"></script>
+    <script>
+        var url = "ws://129.28.195.216:61614";
+        // var url = "ws://121.40.165.18:8800";
+        var client = Stomp.client(url);
+        // client will send heartbeats every 20000ms
+        client.heartbeat.outgoing = 20000;
+        client.heartbeat.incoming = 0;
+        client.connect("", "", function (frame) {
+            // upon connection, subscribe to the destination
+            var sub = client.subscribe("/topic/testTopic", function (message) {
+                console.log("receive: " + message.body);
+            });
+        });
+    </script>
+</body>
+
+
+location = /mqtt {
+
+        # 8083就是我们的emq的websocket的端口号
+        proxy_pass http://129.204.15.13:1883;
+        proxy_redirect off;
+        proxy_set_header Host  129.204.15.13:1883;
+
+        proxy_set_header Sec-WebSocket-Protocol mqtt;
+
+        # 这个是与你的 js客户端的库有关系，本博文的不需要，为了兼顾以后小伙伴，我这里注释了下！ 
+        #more_clear_headers Sec-WebSocket-Protocol;
+
+        # 这些都是 websocket必须要配置的
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+}
+
+</html>
+
+
+condition_description: "",
+enbody: "Student Entrepreneurship",
+have_present: false,
+id: "3",
+image: "https://www.nsnsvip.com/data/upload/membergrade/c7e7556a4dddcc2ce29f00ab8d332038.png",
+interest_description: "",
+is_fill_address: true,
+lever_image: [],
+name: "创业学生",
+price: "199.00",
+raw: {id: "3", name: "创业学生", image: "https://www.nsnsvip.com/data/upload/membergrade/c7e7556a4dddcc2ce29f00ab8d332038.png", body: {application: "",enjoy_right: ""}, price: "199.00", en_body:"Veterans Start a Business", is_fill_address: true,lever_image: []},
+__id: 3,
+__price_number: 199,
+__rechargeable: true
+
+condition_description: "",
+enbody: "Super Entrepreneur",
+have_present: false,
+id: "5",
+image: "https://rymall.ruyishangwu.com:909/data/upload/membergrade/54dcd223f259682439278b755119c010.png",
+interest_description: "",
+is_fill_address: true,
+lever_image: [],
+name: "超级创客",
+price: "5999.00",
+raw: { id: "5", name: "超级创客", image: "https://rymall.ruyishangwu.com:909/data/upload/membergrade/54dcd223f259682439278b755119c010.png", body: { application: "", enjoy_right: "" }, price: "5999.00", en_body: "Super Entrepreneur", is_fill_address: 1, lever_image: [] },
+__id: 5,
+__price_number: 5999,
+__rechargeable: true

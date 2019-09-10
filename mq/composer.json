@@ -1,0 +1,5 @@
+{
+    "require": {
+        "fusesource/stomp-php": "^2.1"
+    }
+}

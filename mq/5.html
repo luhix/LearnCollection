@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="./mqttws31.js"></script>
+	
+	<script>
+		var client  = mqtt.connect('mq.tongxinmao.com:18832')
+
+		client.on('connect', function () {
+		  client.subscribe('presence', function (err) {
+		    if (!err) {
+		      client.publish('presence', 'Hello mqtt')
+		    }
+		  })
+		})
+
+		client.on('message', function (topic, message) {
+		  // message is Buffer
+		  console.log(message.toString())
+		  client.end()
+		})
+	</script>
+</body>
+</html>

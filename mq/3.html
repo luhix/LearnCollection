@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+   <meta charset="utf-8">
+   <title>点对点发送</title>
+	<script type="text/javascript" src="stomp.js"></script>
+      
+   </head>
+   <body>
+   
+      <div id="sse">
+         <a href="javascript:WebSocketTest()">运行 WebSocket</a>
+      </div>
+
+    <script type="text/javascript">
+
+    		// tcp 协议是 61613   websocket 端口是 61614
+		    var url = "ws://129.28.195.216:61614/stomp"; 
+		    var destination = "MessageQueue";
+		    var client = Stomp.client(url);
+		    
+		    var callbackMSG = function(message) {
+
+		    	// 获取 服务器发送 回来的数据
+
+		        if (message.body) {
+		            alert("got message with body " + message.body)
+		        } else {
+		            alert("got empty message");
+		        }
+		    };
+		    
+		    var connect_callback = function(frame) {
+		      client.subscribe(destination, callbackMSG);
+		    };
+
+		    var error_callback = function(error) {
+		        alert(error.headers.message);
+		    };
+		    var headers = {
+		        login: 'admin',
+		        passcode: 'admin',
+		        // additional header
+		        'client-id': 'my-client-id'
+		    };
+		    client.connect(headers, connect_callback, error_callback);
+   </script>
+      
+   </body>
+</html>
